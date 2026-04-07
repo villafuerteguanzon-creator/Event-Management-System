@@ -1,0 +1,29 @@
+Event Management System
+
+🛠️ Tech Stack
+Frontend
+HTML5 & CSS3: Modern layouts using CSS Grid and Flexbox.
+Vanilla JavaScript: Modular architecture using ES Modules.
+FontAwesome: High-quality icons for a better user experience.
+Backend
+Node.js & Express: Fast and scalable server-side environment.
+MySQL: Relational database for structured data management.
+mysql2: Modern MySQL driver for Node.js.
+CORS & Dotenv: Enhanced security and environment configuration.
+
+Project Structure
+
+airline-flight-management/
+├── client/ # Frontend application
+│ ├── js/ # JavaScript modules (api.js, app.js)
+│ ├── index.html # Main entry point
+│ └── style.css # Global styles
+├── server/ # Backend API
+│ ├── config/ # Database configuration
+│ ├── controllers/ # Business logic for each resource
+│ ├── routes/ # API endpoints
+│ ├── index.js # Server entry point
+│ ├── schema.sql # Database schema
+│ └── init-db.js # Database initialization script
+│ └── .env # Environment Variables
+└── API_DOCUMENTATION.md # Detailed API endpoint reference

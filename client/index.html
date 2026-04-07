@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management System | Professional Event Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Event Management System</div>
+            <ul id="nav-links">
+                <li><a href="#events">Explore</a></li>
+                <li id="auth-links">
+                    <a href="#" id="login-link">Login</a>
+                    <a href="#" id="register-link" class="btn-primary" style="padding: 0.5rem 1rem; margin-left: 10px; width: auto;">Sign Up</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Home View -->
+        <div id="home-view">
+            <section id="hero">
+                <h1>Experience Extraordinary</h1>
+                <p>Discover and book the most exclusive events in your city. From tech conferences to music festivals.</p>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search events, venues, or categories...">
+                    <select id="category-filter">
+                        <option value="">All Categories</option>
+                    </select>
+                    <select id="sort-filter">
+                        <option value="newest">Newest first</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                    <button id="search-button" class="btn-primary" style="width: auto; border-radius: 9999px; padding: 0.75rem 2rem;">Search</button>
+                </div>
+            </section>
+
+            <section id="my-bookings-home" style="display: none; padding: 4rem 2rem; max-width: 1280px; margin: 0 auto;">
+                <h2>Your Upcoming Experiences</h2>
+                <div id="my-booking-list-home" class="grid-container"></div>
+            </section>
+
+            <section id="events">
+                <h2>Featured Events</h2>
+                <div id="event-list" class="grid-container"></div>
+            </section>
+        </div>
+
+        <!-- Dashboard View (Sidebar Layout) -->
+        <div id="dashboard-view" style="display: none;" class="dashboard-wrapper">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#" id="side-nav-overview" class="active">My Bookings</a></li>
+                        <li id="side-nav-manage-events-li" style="display: none;"><a href="#" id="side-nav-manage-events">Manage Events</a></li>
+                        <li style="margin-top: 2rem;"><a href="#" id="logout-link-side" style="color: var(--accent);">Logout</a></li>
+                    </ul>
+                </nav>
+            </aside>
+            <main class="main-content-area">
+                <section id="dashboard-overview">
+                    <h2 id="dashboard-title" style="text-align: left;">Dashboard Overview</h2>
+                    <div id="dashboard-content"></div>
+                </section>
+
+                <section id="events-management-dashboard" style="display: none;">
+                    <div class="section-header">
+                        <h2>Event Management</h2>
+                        <button class="btn-primary" id="btn-add-event-dashboard" style="width: auto;">+ Create New Event</button>
+                    </div>
+                    <div class="search-container" style="margin-bottom: 2rem; max-width: 100%;">
+                        <input type="text" id="manage-search-input" placeholder="Filter your events...">
+                    </div>
+                    <div id="events-grid-dashboard" class="grid-container"></div>
+                </section>
+            </main>
+        </div>
+    </main>
+
+    <footer style="margin-top: 0;">
+        <div style="max-width: 1280px; margin: 0 auto; padding: 4rem 2rem; border-top: 1px solid var(--border);">
+            <p>&copy; 2026 Event Management System. Built for excellence.</p>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-event-title" style="margin-bottom: 1.5rem;">Secure Your Spot</h2>
+            <form id="booking-form">
+                <input type="hidden" id="modal-event-id">
+                <input type="hidden" id="modal-booking-id">
+                <div class="form-group">
+                    <label for="ticket-count" style="font-weight: 600;">Number of Tickets</label>
+                    <input type="number" id="ticket-count" min="1" value="1" required style="padding: 0.75rem;">
+                </div>
+                <button type="submit" class="btn-primary" style="margin-top: 1rem;">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content" style="max-width: 450px;">
+            <span class="close-auth">&times;</span>
+            <div id="login-form-container">
+                <h2 style="margin-bottom: 0.5rem;">Welcome Back</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Login to manage your bookings and events.</p>
+                <form id="login-form">
+                    <div class="form-group"><label style="font-weight: 500;">Email Address</label><input type="email" id="login-email" required></div>
+                    <div class="form-group"><label style="font-weight: 500;">Password</label><input type="password" id="login-password" required></div>
+                    <button type="submit" class="btn-primary" style="margin-top: 1rem;">Sign In</button>
+                    <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem;">Don't have an account? <a href="#" id="show-register" style="color: var(--secondary); font-weight: 600;">Create one</a></p>
+                </form>
+            </div>
+            <div id="register-form-container" style="display: none;">
+                <h2 style="margin-bottom: 0.5rem;">Create Account</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Join the Event Management System community today.</p>
+                <form id="register-form">
+                    <div class="form-group"><label style="font-weight: 500;">Full Name</label><input type="text" id="reg-name" required></div>
+                    <div class="form-group"><label style="font-weight: 500;">Email Address</label><input type="email" id="reg-email" required></div>
+                    <div class="form-group"><label style="font-weight: 500;">Password</label><input type="password" id="reg-password" required></div>
+                    <button type="submit" class="btn-primary" style="margin-top: 1rem;">Register Now</button>
+                    <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem;">Already have an account? <a href="#" id="show-login" style="color: var(--secondary); font-weight: 600;">Sign in here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Modal (Admin/Organizer) -->
+    <div id="event-modal" class="modal">
+        <div class="modal-content" style="max-width: 700px;">
+            <span class="close-event">&times;</span>
+            <h2 id="event-modal-title" style="margin-bottom: 2rem;">Event Details</h2>
+            <form id="event-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <input type="hidden" id="event-id">
+                <div class="form-group" style="grid-column: span 2;"><label style="font-weight: 500;">Event Title</label><input type="text" id="event-title-input" required></div>
+                <div class="form-group" style="grid-column: span 2;"><label style="font-weight: 500;">Description</label><textarea id="event-desc-input" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem; min-height: 100px;"></textarea></div>
+                <div class="form-group"><label style="font-weight: 500;">Start Time</label><input type="datetime-local" id="event-start-input" required></div>
+                <div class="form-group"><label style="font-weight: 500;">End Time</label><input type="datetime-local" id="event-end-input" required></div>
+                <div class="form-group"><label style="font-weight: 500;">Price ($)</label><input type="number" step="0.01" id="event-price-input" required></div>
+                <div class="form-group"><label style="font-weight: 500;">Capacity</label><input type="number" id="event-capacity-input" required></div>
+                <div class="form-group"><label style="font-weight: 500;">Venue</label><select id="event-venue-input" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem;"></select></div>
+                <div class="form-group"><label style="font-weight: 500;">Category</label><select id="event-category-input" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem;"></select></div>
+                <div class="form-group"><label style="font-weight: 500;">Status</label><select id="event-status-input" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 0.5rem;">
+                    <option value="published">Published</option>
+                    <option value="draft">Draft</option>
+                    <option value="completed">Completed</option>
+                </select></div>
+                <div class="form-group"><label style="font-weight: 500;">Event Image</label><input type="file" id="event-image-input" accept="image/*"></div>
+                <div style="grid-column: span 2; margin-top: 1rem;"><button type="submit" class="btn-primary">Save Event Information</button></div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

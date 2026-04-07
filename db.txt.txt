@@ -1,0 +1,50 @@
+erDiagram
+    USERS ||--o{ EVENTS : organizes
+    USERS ||--o{ BOOKINGS : makes
+    EVENTS ||--o{ BOOKINGS : contains
+    CATEGORIES ||--o{ EVENTS : classifies
+    VENUES ||--o{ EVENTS : hosts
+
+    USERS {
+        uuid id PK
+        string email UK
+        string password_hash
+        string full_name
+        string role
+    }
+
+    EVENTS {
+        uuid id PK
+        string title
+        text description
+        datetime start_time
+        datetime end_time
+        decimal price
+        int capacity
+        uuid organizer_id FK
+        uuid venue_id FK
+        uuid category_id FK
+    }
+
+    BOOKINGS {
+        uuid id PK
+        uuid user_id FK
+        uuid event_id FK
+        datetime booked_at
+        string status
+        int ticket_count
+    }
+
+    VENUES {
+        uuid id PK
+        string name
+        string address
+        int capacity
+    }
+
+    CATEGORIES {
+        uuid id PK
+        string name
+    }
+
+
